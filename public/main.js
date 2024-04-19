@@ -1,5 +1,20 @@
-function init() {
+async function init() {
 const input = document.getElementById('upload')
+
+//creating a variable to store the rustapp 
+let rustapp = null
+
+//using a try catch block to try getting the rustapp and if it fails, it will catch the error and log it to the console
+try {
+    rustapp = await import('../pkg')
+    console.log(rustapp)
+}
+catch(e)
+{
+    //logging the error and returning to stop the execution of the function
+console.log(e);
+return;
+}
 
 // Create a new FileReader object that can read the file as string to pass the string to the rust files
 let fileReader = new FileReader(); 

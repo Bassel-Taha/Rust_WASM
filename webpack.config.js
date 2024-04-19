@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const wasmToolPlugIn = require('@wasm-tool/wasm-pack-plugin');
+const { experiments } = require('webpack');
 module.exports = {
   entry: './public/main.js',
   output: {
@@ -20,4 +21,9 @@ module.exports = {
       crateDirectory : path(__dirname , ".")
     }) 
 ],
+//todo must add the experiment features in the webpack.config.js file to enable rust compilation feature as its an experimental feature in webpack
+// and to enable the higher level async features
+experiments: {
+ asyncWebAssembly: true
+}
 };
