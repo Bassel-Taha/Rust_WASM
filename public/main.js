@@ -13,7 +13,6 @@ fileReader.onloadend = ()=>{
 
     //removing the metadata of the file
     let fileWithoutMetadata = fileReader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-
     console.log(fileWithoutMetadata);
 }
 
