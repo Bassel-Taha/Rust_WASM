@@ -5,7 +5,13 @@ module.exports = {
   entry: './public/main.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index_bundle.js',
+    filename: 'index.js',
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin(
+        {
+            template: './public/index.html'
+        }
+    )
+],
 };
