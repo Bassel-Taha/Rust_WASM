@@ -23,19 +23,19 @@ let fileReader = new FileReader();
 fileReader.onloadend = ()=>{
     //the resault is encoded using base64 encoding 
     let base64File = fileReader.result
-    console.log(base64File)
-    console.log(input.files[0]);
 
     //removing the metadata of the file
     let fileWithoutMetadata = fileReader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
     console.log(fileWithoutMetadata);
 }
 
-input.addEventListener("change", ()=>{
+if (input.files.length !== 0) {
+//using the readAsDataURL method to read the file as a string with the base64 encoding to be easy for transfering the string to the rust files
+input.addEventListener('change', ()=>{
     //using the readAsDataURL method to read the file as a string with the base64 encoding to be easy for transfering the string to the rust files
     fileReader.readAsDataURL(input.files[0])
 })
-
+}
 }
 
 init()
