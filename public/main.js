@@ -32,11 +32,8 @@ fileReader.onloadend = ()=>{
 }
 
 input.addEventListener("change", ()=>{
-
     //using the readAsDataURL method to read the file as a string with the base64 encoding to be easy for transfering the string to the rust files
     fileReader.readAsDataURL(input.files[0])
-    
-
 })
 
 }
