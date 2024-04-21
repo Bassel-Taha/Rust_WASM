@@ -19,23 +19,22 @@ return;
 // Create a new FileReader object that can read the file as string to pass the string to the rust files
 let fileReader = new FileReader(); 
 
-// When the file is loaded, remove the metadata of the file
-fileReader.onloadend = ()=>{
-    //the resault is encoded using base64 encoding 
-    let base64File = fileReader.result
-
-    //removing the metadata of the file
-    let fileWithoutMetadata = fileReader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-    console.log(fileWithoutMetadata);
-}
-
-if (input.files.length !== 0) {
-//using the readAsDataURL method to read the file as a string with the base64 encoding to be easy for transfering the string to the rust files
+// When the input changes, read the file
 input.addEventListener('change', ()=>{
     //using the readAsDataURL method to read the file as a string with the base64 encoding to be easy for transfering the string to the rust files
     fileReader.readAsDataURL(input.files[0])
 })
-}
+
+// When the file is loaded, remove the metadata of the file
+fileReader.onloadend = ()=>{
+    //the resault is encoded using base64 encoding 
+    let base64File = fileReader.result
+    //removing the metadata of the file
+    let fileWithoutMetadata = fileReader.result.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+
+    //calling the rustapp module to call th ecompiled functions in the rust files
+    rustapp.Gray_Scale(fileWithoutMetadata);    
+}   
 }
 
 init()
