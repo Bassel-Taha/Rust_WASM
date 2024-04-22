@@ -2,6 +2,7 @@ use wasm_bindgen::prelude::*;
 use web_sys::console::log_1 ;
 use base64::decode;
 use image::load_from_memory;
+use image::load_from_memory;
 
 //exporting the Gray_Scale function to the JS side of the code using the wasm_bindgen macro attribute
 #[wasm_bindgen]
