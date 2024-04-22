@@ -15,8 +15,13 @@ pub fn Gray_Scale(encoded_Image : &str)
 
     log_1(&"the image is decoded and logged to the console".into());
     //loading the image from the memory
-    let img = load_from_memory(&decoded_Image).unwrap();
+    let mut img = load_from_memory(&decoded_Image).unwrap();
     log_1(&"the image is loaded from the memory".into());
+    //converting the image to a grayscale image
+    img.grayscale();
+    log_1(&"the image is converted to a grayscale image".into());
 
-    log_1(&"the image is decoded and logged to the console".into());   
+    img.blur(10.0);
+    log_1(&"the image is blurred".into());
+
 }
