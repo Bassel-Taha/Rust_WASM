@@ -4,7 +4,12 @@ use web_sys::console::log_1 ;
 use base64::{decode , encode};
 use image::{load_from_memory, DynamicImage};
 use image::ImageFormat::Png;
-use std::io::Cursor;
+use std::io::{Cursor, Read};
+
+fn IsProcessing() -> bool
+{
+    return false;
+}
 
 //exporting the Gray_Scale function to the JS side of the code using the wasm_bindgen macro attribute
 #[wasm_bindgen]
@@ -21,10 +26,10 @@ pub fn Gray_Scale(encoded_Image : &str) -> String
     let mut img = load_from_memory(&decoded_Image).unwrap();
     log_1(&"the image is loaded from the memory".into());
     //converting the image to a grayscale image
-    img.grayscale();
+    img = img.grayscale();
     log_1(&"the image is converted to a grayscale image".into());
 
-    img.blur(10.0);
+    img = img.blur(5.0);
     log_1(&"the image is blurred".into());
 
     //converting the image to a vector of bytes
@@ -34,7 +39,7 @@ pub fn Gray_Scale(encoded_Image : &str) -> String
     log_1(&"the image is written and created a new image with the demanded effects".into());
 
     //converting the final image in the buffer object of bytes to a base64 encoded string
-    let final_Image_With_Effects =  encode(&mut buffer);
+    let final_Image_With_Effects =  encode(&mut buffer.get_ref());
 
     //adding the meta data to the string to be able to display the image in the HTML side of the code
     let final_Image_With_Effects = format!("data:image/png;base64,{}", final_Image_With_Effects);
@@ -42,3 +47,4 @@ pub fn Gray_Scale(encoded_Image : &str) -> String
     return final_Image_With_Effects;
 
 }
+
